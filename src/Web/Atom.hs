@@ -132,7 +132,9 @@ makeEntry uri title updated = Entry
 -- function is partial so only use this if you're hardcoding the URI string and
 -- you're sure that it's valid./
 unsafeURI :: String -> URI
-unsafeURI = fromJust . parseURI
+unsafeURI s = case parseURI s of
+                Just u -> u
+                Nothing -> error $ "Unable to parse URI string: " ++ s
 
 -- -------------------------
 -- External XML construction
